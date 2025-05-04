@@ -18,7 +18,7 @@ import WalletOutlined from '@ant-design/icons/WalletOutlined';
 export default function ProfileTab() {
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton>
+      {/* <ListItemButton>
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
@@ -42,7 +42,7 @@ export default function ProfileTab() {
           <WalletOutlined />
         </ListItemIcon>
         <ListItemText primary="Billing" />
-      </ListItemButton>
+      </ListItemButton> */}
       <ListItemButton>
         <ListItemIcon>
           <LogoutOutlined />

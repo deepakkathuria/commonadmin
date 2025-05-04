@@ -90,7 +90,7 @@ export default function Profile() {
         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center', p: 0.5 }}>
           <Avatar alt="profile user" src={avatar1} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            John Doe
+            Admin
           </Typography>
         </Stack>
       </ButtonBase>
@@ -119,7 +119,7 @@ export default function Profile() {
                 <MainCard elevation={0} border={false} content={false}>
                   <CardContent sx={{ px: 2.5, pt: 3 }}>
                     <Grid container justifyContent="space-between" alignItems="center">
-                      <Grid>
+                      {/* <Grid>
                         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center' }}>
                           <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                           <Stack>
@@ -129,18 +129,18 @@ export default function Profile() {
                             </Typography>
                           </Stack>
                         </Stack>
-                      </Grid>
+                      </Grid> */}
                       <Grid>
-                        <Tooltip title="Logout">
+                        {/* <Tooltip title="Logout">
                           <IconButton size="large" sx={{ color: 'text.primary' }}>
                             <LogoutOutlined />
                           </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                       </Grid>
                     </Grid>
                   </CardContent>
 
-                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="profile tabs">
                       <Tab
                         sx={{
@@ -175,7 +175,7 @@ export default function Profile() {
                         {...a11yProps(1)}
                       />
                     </Tabs>
-                  </Box>
+                  </Box> */}
                   <TabPanel value={value} index={0} dir={theme.direction}>
                     <ProfileTab />
                   </TabPanel>
