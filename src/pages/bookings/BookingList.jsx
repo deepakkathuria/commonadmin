@@ -24,7 +24,7 @@ export default function BookingList() {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/bookings');
+      const response = await axios.get('https://radharidhani.in/api/bookings');
       setBookings(response.data.bookings || []);
     } catch (err) {
       console.error('Error fetching bookings:', err);

@@ -12,7 +12,7 @@ export default function BookingSummary() {
 
   const fetchBooking = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/booking-summary/${id}`);
+      const res = await axios.get(`https://radharidhani.in/api/booking-summary/${id}`);
       setBooking(res.data.booking);
     } catch (err) {
       console.error(err);

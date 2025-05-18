@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import CardContent from '@mui/material/CardContent';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import Stack from '@mui/material/Stack';
@@ -23,6 +24,7 @@ import Avatar from 'components/@extended/Avatar';
 import MainCard from 'components/MainCard';
 import Transitions from 'components/@extended/Transitions';
 import IconButton from 'components/@extended/IconButton';
+import { logout } from 'utils/auth';
 
 // assets
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
@@ -33,11 +35,24 @@ import avatar1 from 'assets/images/users/avatar-1.png';
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
-    <div role="tabpanel" hidden={value !== index} id={`profile-tabpanel-${index}`} aria-labelledby={`profile-tab-${index}`} {...other}>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`profile-tabpanel-${index}`}
+      aria-labelledby={`profile-tab-${index}`}
+      {...other}
+    >
       {value === index && children}
     </div>
   );
 }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  value: PropTypes.number,
+  index: PropTypes.number,
+  other: PropTypes.any
+};
 
 function a11yProps(index) {
   return {
@@ -50,6 +65,7 @@ function a11yProps(index) {
 
 export default function Profile() {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -78,8 +94,14 @@ export default function Profile() {
           bgcolor: open ? 'grey.100' : 'transparent',
           borderRadius: 1,
           '&:hover': { bgcolor: 'secondary.lighter' },
-          '&:focus-visible': { outline: `2px solid ${theme.palette.secondary.dark}`, outlineOffset: 2 },
-          ...theme.applyStyles('dark', { bgcolor: open ? 'background.default' : 'transparent', '&:hover': { bgcolor: 'secondary.light' } })
+          '&:focus-visible': {
+            outline: `2px solid ${theme.palette.secondary.dark}`,
+            outlineOffset: 2
+          },
+          ...theme.applyStyles?.('dark', {
+            bgcolor: open ? 'background.default' : 'transparent',
+            '&:hover': { bgcolor: 'secondary.light' }
+          })
         })}
         aria-label="open profile"
         ref={anchorRef}
@@ -90,7 +112,7 @@ export default function Profile() {
         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center', p: 0.5 }}>
           <Avatar alt="profile user" src={avatar1} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            Admin
+            Admin 1221
           </Typography>
         </Stack>
       </ButtonBase>
@@ -114,34 +136,54 @@ export default function Profile() {
       >
         {({ TransitionProps }) => (
           <Transitions type="grow" position="top-right" in={open} {...TransitionProps}>
-            <Paper sx={(theme) => ({ boxShadow: theme.customShadows.z1, width: 290, minWidth: 240, maxWidth: { xs: 250, md: 290 } })}>
+            <Paper
+              sx={(theme) => ({
+                boxShadow: theme.customShadows.z1,
+                width: 290,
+                minWidth: 240,
+                maxWidth: { xs: 250, md: 290 }
+              })}
+            >
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard elevation={0} border={false} content={false}>
                   <CardContent sx={{ px: 2.5, pt: 3 }}>
                     <Grid container justifyContent="space-between" alignItems="center">
-                      {/* <Grid>
+                      <Grid item>
                         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center' }}>
                           <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
                           <Stack>
-                            <Typography variant="h6">John Doe</Typography>
+                            <Typography variant="h6">Admin</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              UI/UX Designer
+                              Logged in
                             </Typography>
                           </Stack>
                         </Stack>
-                      </Grid> */}
-                      <Grid>
-                        {/* <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }}>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip title="Logout">
+                          <IconButton
+                            size="large"
+                            sx={{ color: 'text.primary' }}
+                            onClick={() => {
+                              logout();
+                              navigate('/login');
+                            }}
+                          >
                             <LogoutOutlined />
                           </IconButton>
-                        </Tooltip> */}
+                        </Tooltip>
                       </Grid>
                     </Grid>
                   </CardContent>
 
-                  {/* <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs variant="fullWidth" value={value} onChange={handleChange} aria-label="profile tabs">
+                  {/* Uncomment tabs if needed later
+                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <Tabs
+                      variant="fullWidth"
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="profile tabs"
+                    >
                       <Tab
                         sx={{
                           display: 'flex',
@@ -176,6 +218,7 @@ export default function Profile() {
                       />
                     </Tabs>
                   </Box> */}
+
                   <TabPanel value={value} index={0} dir={theme.direction}>
                     <ProfileTab />
                   </TabPanel>
@@ -191,5 +234,3 @@ export default function Profile() {
     </Box>
   );
 }
-
-TabPanel.propTypes = { children: PropTypes.node, value: PropTypes.number, index: PropTypes.number, other: PropTypes.any };

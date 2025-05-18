@@ -33,7 +33,7 @@ export default function BookingForm() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/available-room-types');
+        const res = await axios.get('https://radharidhani.in/api/available-room-types');
         setRooms(res.data.rooms || []);
       } catch (err) {
         console.error('Failed to fetch rooms', err);
@@ -50,7 +50,7 @@ export default function BookingForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/confirm-booking', {
+      const res = await axios.post('https://radharidhani.in/api/confirm-booking', {
         ...formData,
         addons: formData.addons,
         room_id: Number(formData.room_id)

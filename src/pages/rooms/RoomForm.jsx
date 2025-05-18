@@ -16,19 +16,21 @@ export default function RoomForm() {
   const [room, setRoom] = useState({
     room_type: '',
     base_price: '',
-    addons: ''
+    addons: '',
+    total_inventory: ''
   });
 
   // Fetch room details if editing
   useEffect(() => {
     if (id) {
-      axios.get(`http://localhost:5000/rooms/${id}`)
+      axios.get(`https://radharidhani.in/api/rooms/${id}`)
         .then(res => {
           const data = res.data.room;
           setRoom({
             room_type: data.room_type || '',
             base_price: data.base_price || '',
-            addons: Array.isArray(data.addons) ? data.addons.join(', ') : ''
+            addons: Array.isArray(data.addons) ? data.addons.join(', ') : '',
+            total_inventory: data.total_inventory || ''
           });
         })
         .catch(err => console.error('Error loading room:', err));
@@ -46,6 +48,7 @@ export default function RoomForm() {
     const payload = {
       room_type: room.room_type,
       base_price: room.base_price,
+      total_inventory: parseInt(room.total_inventory),
       addons: room.addons
         ? room.addons.split(',').map(a => a.trim())
         : []
@@ -53,10 +56,10 @@ export default function RoomForm() {
 
     try {
       if (id) {
-        await axios.put(`http://localhost:5000/rooms/${id}`, payload);
+        await axios.put(`https://radharidhani.in/api/rooms/${id}`, payload);
         alert("Room updated successfully");
       } else {
-        await axios.post('http://localhost:5000/rooms', payload);
+        await axios.post('https://radharidhani.in/api/rooms', payload);
         alert("Room added successfully");
       }
       navigate('/rooms');
@@ -85,6 +88,14 @@ export default function RoomForm() {
           type="number"
           fullWidth
           value={room.base_price}
+          onChange={handleChange}
+        />
+        <TextField
+          name="total_inventory"
+          label="Total Inventory"
+          type="number"
+          fullWidth
+          value={room.total_inventory}
           onChange={handleChange}
         />
         <TextField

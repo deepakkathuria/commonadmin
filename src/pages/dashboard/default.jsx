@@ -273,7 +273,7 @@ export default function DashboardDefault() {
   useEffect(() => {
     const fetchBookingStats = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/bookings-stats');
+        const response = await axios.get('https://radharidhani.in/api/bookings-stats');
         const { today, tomorrow, upcoming } = response.data;
 
         setTodayCount(parseInt(today) || 0);
