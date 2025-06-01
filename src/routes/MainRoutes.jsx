@@ -63,6 +63,7 @@ const RoomForm = Loadable(lazy(() => import('pages/rooms/RoomForm')));
 const BookingForm = Loadable(lazy(() => import('pages/bookings/BookingForm')));
 const BookingList = Loadable(lazy(() => import('pages/bookings/BookingList')));
 const BookingSummary = Loadable(lazy(() => import('pages/bookings/BookingSummary')));
+const ContactMessages = Loadable(lazy(() => import('pages/contact/ContactMessages')));
 
 const MainRoutes = {
   path: '/',
@@ -79,7 +80,9 @@ const MainRoutes = {
         { path: 'rooms/edit/:id', element: <RoomForm /> },
         { path: 'bookings', element: <BookingList /> },
         { path: 'bookings/add', element: <BookingForm /> },
-        { path: 'bookings/:id', element: <BookingSummary /> }
+        { path: 'bookings/:id', element: <BookingSummary /> },
+        { path: 'contact-messages', element: <ContactMessages/>}
+
       ]
     }
   ]

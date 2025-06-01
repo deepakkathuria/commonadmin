@@ -21,12 +21,14 @@ import pages from './page';
 // import support from './support';
 import rooms from './rooms'; // ✅ add this line
 import bookings from './bookings'; // ✅ Add this line
+import contact from './contact'; // ✅ Add this line
+
 
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [dashboard, rooms, pages, bookings] // ✅ add "rooms" here
+  items: [dashboard, rooms, pages, bookings,contact] // ✅ add "rooms" here
 };
 
 export default menuItems;

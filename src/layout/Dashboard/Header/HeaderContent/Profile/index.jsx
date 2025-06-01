@@ -35,13 +35,7 @@ import avatar1 from 'assets/images/users/avatar-1.png';
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`profile-tabpanel-${index}`}
-      aria-labelledby={`profile-tab-${index}`}
-      {...other}
-    >
+    <div role="tabpanel" hidden={value !== index} id={`profile-tabpanel-${index}`} aria-labelledby={`profile-tab-${index}`} {...other}>
       {value === index && children}
     </div>
   );
@@ -112,7 +106,7 @@ export default function Profile() {
         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center', p: 0.5 }}>
           <Avatar alt="profile user" src={avatar1} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            Admin 1221
+            Admin
           </Typography>
         </Stack>
       </ButtonBase>
@@ -220,7 +214,12 @@ export default function Profile() {
                   </Box> */}
 
                   <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ProfileTab />
+                    <ProfileTab
+                      handleLogout={() => {
+                        logout();
+                        navigate('/login');
+                      }}
+                    />{' '}
                   </TabPanel>
                   <TabPanel value={value} index={1} dir={theme.direction}>
                     <SettingTab />
